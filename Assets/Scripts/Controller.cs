@@ -29,28 +29,38 @@ public class Controller : MonoBehaviour
     // 攻撃ボタンを押したときの処理
     void OnAttack(InputAction.CallbackContext context)
     {
-        switch (state)
+        if(player.getNowHitPoint() == 0)
         {
-            // playerの攻撃
-            case 0:
-                textView.UpdateText($"{player.getUnitName()}の攻撃");
-                break;
-            // playerはenemyに25ダメージを与えた
-            case 1:
-                DamageCalculation(player, enemy);
-                break;
-            // enemyの攻撃
-            case 2:
-                textView.UpdateText($"{enemy.getUnitName()}の攻撃");
-                break;
-            // enemyはplayerに25ダメージ与えた
-            case 3:
-                DamageCalculation(enemy, player);
-                break;
+            textView.UpdateText($"{enemy.name}の勝利");
         }
-        state ++;
-        state %= 4;
-        
+        else if (enemy.getNowHitPoint() == 0)
+        {
+            textView.UpdateText($"{player.name}の勝利");
+        }
+        else
+        {
+            switch (state)
+            {
+                // playerの攻撃
+                case 0:
+                    textView.UpdateText($"{player.getUnitName()}の攻撃");
+                    break;
+                // playerはenemyに25ダメージを与えた
+                case 1:
+                    DamageCalculation(player, enemy);
+                    break;
+                // enemyの攻撃
+                case 2:
+                    textView.UpdateText($"{enemy.getUnitName()}の攻撃");
+                    break;
+                // enemyはplayerに25ダメージ与えた
+                case 3:
+                    DamageCalculation(enemy, player);
+                    break;
+            }
+            state ++;
+            state %= 4;
+        }
     }
 
     // ダメージ計算

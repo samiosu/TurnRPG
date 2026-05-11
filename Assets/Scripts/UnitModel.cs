@@ -20,9 +20,14 @@ public class UnitModel : MonoBehaviour
         if(nowHitPoint <= 0)
         {
             nowHitPoint = 0;
+            textView.UpdateText($"{attack.unitName}は{unitName}に{damage}ダメージを与えた");
+        }
+        else
+        {
+            textView.UpdateText($"{attack.unitName}は{unitName}に{damage}ダメージを与えた");
         }
         unitView.UpdateUI(maxHitPoint, nowHitPoint);
-        textView.UpdateText($"{attack.unitName}は{unitName}に{damage}ダメージを与えた");
+        
     }
     
     public string getUnitName()
